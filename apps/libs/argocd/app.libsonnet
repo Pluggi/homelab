@@ -12,7 +12,11 @@
         source: {
           repoURL: "https://github.com/Pluggi/homelab.git",
           targetRevision: "main",
-          path: "generated/%s" % name,
+          path: "apps/generated/%s" % name,
+          directory: {
+            recurse: true,
+            include: "{*.json,*.yml,*.yaml}",
+          },
         },
         destination: {
           server: "https://kubernetes.default.svc",

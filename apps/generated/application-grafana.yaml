@@ -12,7 +12,11 @@
     },
     "project": "default",
     "source": {
-      "path": "generated/grafana",
+      "directory": {
+        "include": "{*.json,*.yml,*.yaml}",
+        "recurse": true
+      },
+      "path": "apps/generated/grafana",
       "repoURL": "https://github.com/Pluggi/homelab.git",
       "targetRevision": "main"
     }

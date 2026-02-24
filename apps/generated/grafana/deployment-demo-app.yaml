@@ -49,6 +49,7 @@
               }
             ],
             "image": "nginx:1.25",
+            "imagePullPolicy": "Always",
             "name": "demo-app",
             "ports": [
               {
@@ -57,7 +58,8 @@
               }
             ]
           }
-        ]
+        ],
+        "enableServiceLinks": false
       }
     }
   }

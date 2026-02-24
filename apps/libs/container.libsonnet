@@ -6,6 +6,7 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
       name=name,
       image=image
     )
+    + k.core.v1.container.withImagePullPolicy("Always")
     + k.core.v1.container.withPorts(ports),
 
   withCommonEnv(ctx): (
