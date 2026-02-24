@@ -28,7 +28,7 @@ local svc = lib.service.fromDeployment(
   deployment=deployment,
 );
 
-[
+lib.utils.exportKubernetesManifests([
   deployment,
   svc,
-]
+])
