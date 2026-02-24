@@ -12,5 +12,5 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
     + k.apps.v1.deployment.mixin.spec.template.metadata.withLabels({ app: name })
     + labelsLib.withCommonLabels(ctx)
     + k.apps.v1.deployment.spec.template.spec.withEnableServiceLinks(false)
-    + k.apps.v1.deployment.spec.withRevisionHistoryLimit(3),
+    + k.apps.v1.deployment.spec.withRevisionHistoryLimit(2),
 }
