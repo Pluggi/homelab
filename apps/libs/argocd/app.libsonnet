@@ -22,6 +22,14 @@
           server: "https://kubernetes.default.svc",
           namespace: name,
         },
+        syncPolicy: {
+          automated: {
+            enabled: true,
+            prune: true,
+            selfHeal: true,
+            allowEmpty: false,
+          },
+        },
       },
     }
   ),

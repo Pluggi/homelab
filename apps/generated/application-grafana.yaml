@@ -19,6 +19,14 @@
       "path": "apps/generated/grafana",
       "repoURL": "https://github.com/Pluggi/homelab.git",
       "targetRevision": "main"
+    },
+    "syncPolicy": {
+      "automated": {
+        "allowEmpty": false,
+        "enabled": true,
+        "prune": true,
+        "selfHeal": true
+      }
     }
   }
 }
