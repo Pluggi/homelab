@@ -1,1 +1,63 @@
-"apiVersion: \"apps/v1\"\nkind: \"Deployment\"\nmetadata:\n  labels:\n    pluggi.fr/budget: \"engineering\"\n    pluggi.fr/team: \"sre\"\n  name: \"demo-app\"\n  namespace: \"default\"\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app: \"demo-app\"\n  template:\n    metadata:\n      labels:\n        app: \"demo-app\"\n    spec:\n      containers:\n        - env:\n            - name: \"NODE_NAME\"\n              valueFrom:\n                fieldRef:\n                  fieldPath: \"spec.nodeName\"\n            - name: \"POD_IP\"\n              valueFrom:\n                fieldRef:\n                  fieldPath: \"status.podIP\"\n            - name: \"KUBE_CLUSTER\"\n              value: \"k3d-homelab\"\n          image: \"nginx:1.25\"\n          name: \"demo-app\"\n          ports:\n            - containerPort: 80\n              name: \"http\""
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "labels": {
+      "pluggi.fr/budget": "engineering",
+      "pluggi.fr/team": "sre"
+    },
+    "name": "demo-app",
+    "namespace": "default"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "demo-app"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "demo-app"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "POD_IP",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "status.podIP"
+                  }
+                }
+              },
+              {
+                "name": "KUBE_CLUSTER",
+                "value": "k3d-homelab"
+              }
+            ],
+            "image": "nginx:1.25",
+            "name": "demo-app",
+            "ports": [
+              {
+                "containerPort": 80,
+                "name": "http"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

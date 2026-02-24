@@ -42,7 +42,7 @@
   exportKubernetesManifests(obj, computeFilenameFn=this.computeFilename)::
     if std.isObject(obj) then
       local selfResult = if this.isKubernetesResource(obj) then
-        { [computeFilenameFn(obj)]: std.manifestYamlDoc(obj, indent_array_in_object=true, quote_keys=false) }
+        { [computeFilenameFn(obj)]: std.manifestJsonEx(obj, "  ") }
       else
         {}
       ;
