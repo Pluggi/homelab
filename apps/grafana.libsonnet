@@ -31,6 +31,7 @@ local svc = lib.service.fromDeployment(
 );
 
 lib.utils.exportKubernetesManifests([
+  lib.argocd.app.new(ctx, "grafana", "grafana"),
   deployment,
   svc,
 ])
