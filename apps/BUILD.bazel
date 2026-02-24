@@ -1,0 +1,33 @@
+load("@rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_library", "jsonnet_to_json")
+
+# Vendored dependencies with vendor/ added to the jsonnet search path,
+# so imports like "github.com/..." resolve to vendor/github.com/...
+jsonnet_library(
+    name = "vendor_lib",
+    srcs = glob(
+        [
+            "vendor/**/*.libsonnet",
+            "vendor/**/*.jsonnet",
+            "vendor/**/*.json",
+        ],
+        allow_empty = True,
+    ),
+    imports = ["vendor"],
+)
+
+# Local helper libraries
+jsonnet_library(
+    name = "libs",
+    srcs = glob(["libs/*.libsonnet"]),
+)
+
+# Render grafana.libsonnet to a single JSON file
+jsonnet_to_json(
+    name = "grafana_json",
+    src = "grafana.libsonnet",
+    outs = ["grafana.json"],
+    deps = [
+        ":libs",
+        ":vendor_lib",
+    ],
+)

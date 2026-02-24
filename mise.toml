@@ -1,2 +1,4 @@
 [tools]
+go-jsonnet = "latest"
+jsonnet-bundler = "latest"
 k3d = "latest"

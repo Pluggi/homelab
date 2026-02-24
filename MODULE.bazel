@@ -1,0 +1,2 @@
+bazel_dep(name = "rules_jsonnet", version = "0.7.2")
+bazel_dep(name = "apple_support", version = "1.24.2", repo_name = "build_bazel_apple_support")
