@@ -1,7 +1,8 @@
+local labelsLib = import "./labels.libsonnet";
 local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
 
 {
-  new(name, namespace, selector, ports, type="ClusterIP"):
+  new(ctx, name, namespace, selector, ports, type="ClusterIP"):
     k.core.v1.service.new(
       name=name,
       selector=selector,
@@ -9,9 +10,10 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
     )
     + k.core.v1.service.metadata.withNamespace(namespace)
     + k.core.v1.service.spec.withType(type)
+    + labelsLib.withCommonLabels(ctx)
   ,
 
-  fromDeployment(name, namespace, deployment, ports=[], type="ClusterIP"):
+  fromDeployment(ctx, name, namespace, deployment, ports=[], type="ClusterIP"):
     assert deployment.kind == "Deployment" : "Only works with deployments";
 
     local selector = deployment.spec.template.metadata.labels;
@@ -41,5 +43,5 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
 
     local effectivePorts = if ports != [] then ports else discoveredPorts;
 
-    self.new(name, namespace, selector, effectivePorts, type),
+    self.new(ctx, name, namespace, selector, effectivePorts, type),
 }

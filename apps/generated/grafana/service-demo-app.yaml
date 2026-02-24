@@ -1,0 +1,27 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "labels": {
+      "pluggi.fr/budget": "engineering",
+      "pluggi.fr/team": "sre",
+      "svc": "grafana"
+    },
+    "name": "demo-app",
+    "namespace": "default"
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "port": 80,
+        "protocol": "TCP",
+        "targetPort": 80
+      }
+    ],
+    "selector": {
+      "app": "demo-app"
+    },
+    "type": "ClusterIP"
+  }
+}

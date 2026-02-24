@@ -10,10 +10,5 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
     + k.apps.v1.deployment.metadata.withNamespace(namespace)
     + k.apps.v1.deployment.mixin.spec.selector.withMatchLabels({ app: name })
     + k.apps.v1.deployment.mixin.spec.template.metadata.withLabels({ app: name })
-    + self.withCommonLabels(ctx)
-  ,
-
-  withCommonLabels(ctx): (
-    k.apps.v1.deployment.metadata.withLabelsMixin(labelsLib.commonLabels(ctx))
-  ),
+    + labelsLib.withCommonLabels(ctx),
 }

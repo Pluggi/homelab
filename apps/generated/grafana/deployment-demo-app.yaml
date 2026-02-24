@@ -4,7 +4,8 @@
   "metadata": {
     "labels": {
       "pluggi.fr/budget": "engineering",
-      "pluggi.fr/team": "sre"
+      "pluggi.fr/team": "sre",
+      "svc": "grafana"
     },
     "name": "demo-app",
     "namespace": "default"

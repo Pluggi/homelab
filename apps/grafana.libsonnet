@@ -4,6 +4,7 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
 local ctx = {
   team: "sre",
   budget: "engineering",
+  svc: "grafana",
   kube_cluster: "k3d-homelab",
 };
 
@@ -23,6 +24,7 @@ local containers = [
 ];
 local deployment = lib.deployment.new(ctx, appName, namespace, containers);
 local svc = lib.service.fromDeployment(
+  ctx,
   name=appName,
   namespace=namespace,
   deployment=deployment,
