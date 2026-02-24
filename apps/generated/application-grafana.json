@@ -11,6 +11,7 @@
       "server": "https://kubernetes.default.svc"
     },
     "project": "default",
+    "revisionHistoryLimit": 3,
     "source": {
       "directory": {
         "include": "{*.json,*.yml,*.yaml}",
@@ -22,11 +23,13 @@
     },
     "syncPolicy": {
       "automated": {
-        "allowEmpty": false,
         "enabled": true,
         "prune": true,
         "selfHeal": true
-      }
+      },
+      "syncOptions": [
+        "ServerSideApply=true"
+      ]
     }
   }
 }

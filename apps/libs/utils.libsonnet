@@ -13,7 +13,7 @@
 
     local parents = this.parentDirectories(obj);
 
-    std.join("/", parents + ["%(kind)s-%(name)s.yaml" % fmt])
+    std.join("/", parents + ["%(kind)s-%(name)s.json" % fmt])
   ,
 
   parentDirectories(obj)::

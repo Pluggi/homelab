@@ -27,9 +27,12 @@
             enabled: true,
             prune: true,
             selfHeal: true,
-            allowEmpty: false,
           },
+          syncOptions: [
+            "ServerSideApply=true",
+          ],
         },
+        revisionHistoryLimit: 3,
       },
     }
   ),
