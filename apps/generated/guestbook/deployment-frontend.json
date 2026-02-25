@@ -1,0 +1,67 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "labels": {
+      "pluggi.fr/budget": "engineering",
+      "pluggi.fr/team": "eng-guestbook",
+      "svc": "guestbook"
+    },
+    "name": "frontend",
+    "namespace": "guestbook"
+  },
+  "spec": {
+    "replicas": 1,
+    "revisionHistoryLimit": 2,
+    "selector": {
+      "matchLabels": {
+        "app": "frontend"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "frontend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "POD_IP",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "status.podIP"
+                  }
+                }
+              },
+              {
+                "name": "KUBE_CLUSTER",
+                "value": "k3d-homelab"
+              }
+            ],
+            "image": "us-docker.pkg.dev/google-samples/containers/gke/gb-frontend:v5",
+            "imagePullPolicy": "Always",
+            "name": "frontend",
+            "ports": [
+              {
+                "containerPort": 80,
+                "name": "http"
+              }
+            ]
+          }
+        ],
+        "enableServiceLinks": false
+      }
+    }
+  }
+}

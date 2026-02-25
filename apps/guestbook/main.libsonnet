@@ -9,6 +9,7 @@ local ctx = {
 };
 
 local redis = import "./redis.libsonnet";
+local frontend = import "./frontend.libsonnet";
 
 local app = lib.argocd.app.new(ctx, "guestbook", "guestbook");
 
@@ -17,4 +18,5 @@ lib.utils.exportKubernetesManifests(
     app,
   ]
   + redis
+  + frontend
 )

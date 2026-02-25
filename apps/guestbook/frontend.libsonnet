@@ -8,17 +8,17 @@ local ctx = {
   kube_cluster: "k3d-homelab",
 };
 
-local appName = "redis";
+local appName = "frontend";
 local namespace = "guestbook";
-local image = "registry.k8s.io/redis@sha256:cb111d1bd870a6a471385a4a69ad17469d326e9dd91e0e455350cacf36e1b3ee";
+local image = "us-docker.pkg.dev/google-samples/containers/gke/gb-frontend:v5";
 local port = 80;
 
 local workloads(ctx, name, namespace, image) = (
   local container = lib.container.new(
                       name, image, ports=[
                         {
-                          name: "redis",
-                          containerPort: 6379,
+                          name: "http",
+                          containerPort: 80,
                         },
                       ]
                     )
