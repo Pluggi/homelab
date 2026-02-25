@@ -23,13 +23,17 @@ local workloads(ctx, name, namespace, image) = (
                       ]
                     )
                     + lib.container.withCommonEnv(ctx);
-  local deployment = lib.deployment.new(ctx, name, namespace, [container]);
+  local leaderDeployment = lib.deployment.new(ctx, name, namespace, [container]);
+  local leaderSvc = lib.service.fromDeployment(ctx, name, namespace, leaderDeployment);
 
-  local svc = lib.service.fromDeployment(ctx, name, namespace, deployment);
+  local followerDeployment = lib.deployment.new(ctx, name + "-follower", namespace, [container]);
+  local followerSvc = lib.service.fromDeployment(ctx, name + "-follower", namespace, leaderDeployment);
 
   [
-    deployment,
-    svc,
+    leaderDeployment,
+    leaderSvc,
+    followerDeployment,
+    followerSvc,
   ]
 );
 
