@@ -22,7 +22,8 @@ local workloads(ctx, name, namespace, image) = (
                         },
                       ]
                     )
-                    + lib.container.withCommonEnv(ctx);
+                    + lib.container.withCommonEnv(ctx)
+                    + lib.container.setEnv("GET_HOSTS_FROM", "dns");
   local deployment = lib.deployment.new(ctx, name, namespace, [container]);
 
   local svc = lib.service.fromDeployment(ctx, name, namespace, deployment);

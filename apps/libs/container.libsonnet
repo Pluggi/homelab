@@ -38,4 +38,13 @@ local k = import "github.com/jsonnet-libs/k8s-libsonnet/1.34/main.libsonnet";
       for key in std.objectFields(staticEnv)
     ])
   ),
+
+  setEnv(key, value): (
+    k.core.v1.container.withEnvMixin([
+      {
+        name: key,
+        value: value,
+      },
+    ])
+  ),
 }

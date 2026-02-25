@@ -47,6 +47,10 @@
               {
                 "name": "KUBE_CLUSTER",
                 "value": "k3d-homelab"
+              },
+              {
+                "name": "GET_HOSTS_FROM",
+                "value": "dns"
               }
             ],
             "image": "us-docker.pkg.dev/google-samples/containers/gke/gb-frontend:v5",
