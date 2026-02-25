@@ -1,0 +1,35 @@
+{
+  "apiVersion": "argoproj.io/v1alpha1",
+  "kind": "Application",
+  "metadata": {
+    "name": "redis",
+    "namespace": "argocd"
+  },
+  "spec": {
+    "destination": {
+      "namespace": "redis",
+      "server": "https://kubernetes.default.svc"
+    },
+    "project": "default",
+    "revisionHistoryLimit": 3,
+    "source": {
+      "directory": {
+        "include": "{*.json,*.yml,*.yaml}",
+        "recurse": true
+      },
+      "path": "apps/generated/redis",
+      "repoURL": "https://github.com/Pluggi/homelab.git",
+      "targetRevision": "main"
+    },
+    "syncPolicy": {
+      "automated": {
+        "enabled": true,
+        "prune": true,
+        "selfHeal": true
+      },
+      "syncOptions": [
+        "ServerSideApply=true"
+      ]
+    }
+  }
+}

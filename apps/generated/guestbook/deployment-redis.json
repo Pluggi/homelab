@@ -27,6 +27,28 @@
       "spec": {
         "containers": [
           {
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "POD_IP",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "status.podIP"
+                  }
+                }
+              },
+              {
+                "name": "KUBE_CLUSTER",
+                "value": "k3d-homelab"
+              }
+            ],
             "image": "registry.k8s.io/redis@sha256:cb111d1bd870a6a471385a4a69ad17469d326e9dd91e0e455350cacf36e1b3ee",
             "imagePullPolicy": "Always",
             "name": "redis",

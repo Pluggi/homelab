@@ -34,6 +34,3 @@ local workloads(ctx, name, namespace, image) = (
 );
 
 workloads(ctx, appName, namespace, image)
-+ [
-  lib.argocd.app.new(ctx, appName, namespace),
-]
